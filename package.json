@@ -20,6 +20,7 @@
     "supervisor": "^0.12.0"
   },
   "scripts": {
-    "start": "supervisor --harmony --watch ./routes,app.js -RV NODE_ENV=devlopoment app.js"
+    "debug": "supervisor --harmony --watch ./routes,app.js -RV NODE_ENV=devlopoment app.js",
+    "start": "NODE_ENV=production pm2 start app.js --node-args='--harmony' --name 'almniapp'"
   }
 }

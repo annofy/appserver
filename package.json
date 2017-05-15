@@ -1,0 +1,25 @@
+{
+  "name": "alumniapp-server",
+  "version": "1.0.0",
+  "description": "alumniapp",
+  "main": "app.js",
+  "repository": "\"\"",
+  "author": "longfan.zheng",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "config": "^1.26.1",
+    "express": "^4.15.2",
+    "moment": "^2.18.1",
+    "mongoose": "^4.9.8",
+    "morgan": "^1.8.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  },
+  "scripts": {
+    "start": "supervisor --harmony --watch ./routes,app.js -RV NODE_ENV=devlopoment app.js"
+  }
+}

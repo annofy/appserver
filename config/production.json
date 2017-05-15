@@ -1,0 +1,11 @@
+{
+  "Customer": {
+    "dbConfig": {
+      "host": "",
+      "port": "",
+      "dbName": ""
+    },
+    "port": 3001,
+    "debug": false
+  }
+}

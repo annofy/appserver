@@ -1,0 +1,13 @@
+{
+  "Customer": {
+    "dbConfig": {
+      "host": "",
+      "port": "",
+      "dbName": ""
+    },
+    "port": 3001,
+    "newsUrl": "http://news.huat.edu.cn",
+    "mtqy": "/mtqy.htm",
+    "xxyw": "/xxyw.htm"
+  }
+}

@@ -301,19 +301,34 @@ const nearsUser = [
   },
 ]
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   let cityCode = req.query.cityCode,
     userList = [], city = null;
-  if (!cityCode && !cityCode) {
+  if (!cityCode) {
     city = req.query.city
-    cityCode = cityData.filter(cv => cv['name'] === city)['code']
+    console.log(req.query.city)
+    cityObj = await cityData.filter(cv => cv['name'].indexOf(city) !== -1)
+    cityCode = cityObj[0]? cityObj[0].code : 0
   }
-  console.log(cityCode)
-  nearsUser.map(cv => {
+  await nearsUser.map(cv => {
     if (cv.cityCode === cityCode) {
       userList.push(cv)
     }
   })
+
+  if(userList.length === 0) {
+    userList = [
+      {
+        id: 1,
+        name: 'longfan.zheng',
+        email: 'zhenglfsir@gmail.com',
+        pic: 'http://ojgquc007.bkt.clouddn.com/IMG20170115195026.jpg',
+        lastLogin: '2017-5-15',
+        cityCode: '179'
+      },
+    ]
+  }
+
   res.json({
     success: true,
     data: {

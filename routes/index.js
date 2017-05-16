@@ -12,6 +12,7 @@ module.exports =app => {
   app.use('/home', require('./home'))
   app.use('/newslist', require('./newslist'))
   app.use('/nears', require('./nears'))
+  app.use('/discuss', require('./discuss'))
 
   app.use((req, res) => {
     if(!res.headersSent) {

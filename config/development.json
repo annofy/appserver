@@ -6,6 +6,8 @@
       "dbName": ""
     },
     "port": 3001,
-    "debug": true
+    "debug": true,
+    "dbUrl": "mongodb://localhost:27017/",
+    "dbName": "qyfriend"
   }
 }

@@ -13,6 +13,7 @@ if (debug) {
   app.use(morgan('combined'))
 }
 
+
 fs.existsSync(logsDir) || fs.mkdirSync(logsDir)
 let accessLogStream = fs.createWriteStream(path.resolve(logsDir, 'access.log'), {flags: 'a'})
 app.use(morgan('combined',{stream: accessLogStream}))

@@ -5,7 +5,8 @@ let request = require('request'),
   newsUrl = config.get('Customer.newsUrl'),
   xxyw = config.get('Customer.xxyw'),
   mtqy = config.get('Customer.mtqy'),
-  rpOptions = {transform: body => cheerio.load(body)};
+  rpOptions = {transform: body => cheerio.load(body)},
+  nodemailer = require('nodemailer');
 
 async function getNewsList(type) {
   let result = {}
@@ -58,6 +59,34 @@ async function getNewsDetail(id, hash) {
   return data
 }
 
+function sendMail(from, to, body) {
+  let transporter = nodemailer.createTransport({
+      service: 'QQ',
+      auth: {
+        user: from.user,
+        pass: from.pass
+      }
+    }),
+    mailOptions = {
+      from: from.user, // sender address
+      to: to.email, // list of receivers
+      subject: body.subject, // Subject line
+      text: body.text, // plaintext body
+      html: body.html // html body
+    };
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, function (error, info) {
+      console.log(info)
+      if (error) {
+        reject(error)
+      } else {
+        resovle(info)
+      }
+    })
+  })
+
+}
+
 module.exports = {
-  getNewsList, getNewsDetail
+  getNewsList, getNewsDetail, sendMail
 }

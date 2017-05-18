@@ -1,9 +1,9 @@
 {
   "Customer": {
     "dbConfig": {
-      "host": "",
-      "port": "",
-      "dbName": ""
+      "host": "mongodb://59.110.69.74",
+      "port": "27127",
+      "dbName": "qyfriend"
     },
     "port": 3001,
     "debug": false,

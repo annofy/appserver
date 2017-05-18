@@ -23,17 +23,18 @@ async function getNewsList(type) {
       Object.keys(alist).map(cv => {
         if (!isNaN(cv)) {
           let item = alist.eq(cv),
-            id = Number(item.attr('href').split('/')[2].split('.')[0]),
+            _id = Number(item.attr('href').split('/')[2].split('.')[0]),
             title = item.attr('title'),
             url = newsUrl + '/' + item.attr('href'),
             hash = item.attr('href');
-          newsList.push({id, title, url, hash})
+          newsList.push({_id, title, url, hash})
         }
       })
       result = newsList
     }).catch(err => {
       throw new Error('获取信息异常:' + err)
     })
+
   return result
 }
 
@@ -42,6 +43,7 @@ async function getNewsDetail(id, hash) {
   let data = null
   await rp(rpOptions).then($ => {
     let headeInfo = $('.mmm123').next().text().split(/：|\s+/),
+      title = $('.table333').text(),
       author = [headeInfo[1], headeInfo[9]],
       time = headeInfo[6] + ' ' + headeInfo[7],
       content = $('#vsb_content_2').text(),
@@ -52,7 +54,8 @@ async function getNewsDetail(id, hash) {
         uris.push(newsUrl + imgs.eq(index).attr('src').split('../..')[1])
       }
     })
-    data = {author, time, content, uris}
+    data = {author, time, content, uris, title, tid: id}
+
   }).catch(err => {
     throw new Error('获取新闻失败')
   })
@@ -68,7 +71,7 @@ function sendMail(from, to, body) {
       }
     }),
     mailOptions = {
-      from: from.user, // sender address
+      from: from.name, // sender address
       to: to.email, // list of receivers
       subject: body.subject, // Subject line
       text: body.text, // plaintext body
@@ -76,17 +79,32 @@ function sendMail(from, to, body) {
     };
   return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, function (error, info) {
-      console.log(info)
       if (error) {
         reject(error)
       } else {
-        resovle(info)
+        console.log('[OK]', '发送邮件成功')
       }
     })
   })
 
 }
 
+function success(res, data) {
+  res.json({
+    success: true,
+    data,
+    reason: '操作成功'
+  })
+}
+
+function error(res, reason) {
+  res.json({
+    success: false,
+    data: {},
+    reason
+  })
+}
+
 module.exports = {
-  getNewsList, getNewsDetail, sendMail
+  getNewsList, getNewsDetail, sendMail, success, error
 }

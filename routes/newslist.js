@@ -1,11 +1,12 @@
 let express = require('express'),
   router = express.Router(),
-
-  util = require('../utils/utils');
+  util = require('../utils/utils'),
+  News = require('../models/News'),
+  NewsContent = require('../models/NewsContent');
 
 
 router.get('/', (req, res) => {
-  util.getNewsList()
+  News.getNewsList()
     .then(newsList => {
       res.json({
         success: true,

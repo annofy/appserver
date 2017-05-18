@@ -8,6 +8,9 @@
     "port": 3001,
     "newsUrl": "http://news.huat.edu.cn",
     "mtqy": "/mtqy.htm",
-    "xxyw": "/xxyw.htm"
+    "xxyw": "/xxyw.htm",
+    "user": "hanfanzero@qq.com",
+    "pass": "vxssxaaxmkkmebai",
+    "username": "hanfanzero@qq.com"
   }
 }

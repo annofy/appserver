@@ -1,10 +1,6 @@
 {
   "Customer": {
-    "dbConfig": {
-      "host": "mongodb://localhost/",
-      "port": "27127",
-      "dbName": "qyfriend"
-    },
+    "dbUrl": "mongodb://localhost/qyfriend",
     "port": 3001,
     "debug": true
   }

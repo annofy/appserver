@@ -4,10 +4,10 @@ const express = require('express'),
   routes = require('./routes'),
   config = require('config'),
   port = config.get('Customer.port'),
+  dbUrl = config.get('Customer.dbUrl')
   debug = config.get('Customer.debug'),
   morgan = require('morgan'),
   path = require('path'),
-  dbConfig = config.get('Customer.dbConfig'),
   mongoose = require('mongoose'),   // mongodb 数据库驱动
   newsService = require('./service/newsService');
 
@@ -23,13 +23,17 @@ if (debug) {
 }
 mongoose.Promise = global.Promise
 
-mongoose.connect(dbConfig.host + dbConfig.dbName, {
-  reconnectTries: Number.MAX_VALUE
+
+mongoose.connect(dbUrl, {
+  reconnectTries: Number.MAX_VALUE,
 }).then(() => {
   console.log('[OK]', '数据库连接成功.')
 }).catch(err => {
-  console.log('[ERROR]', '重新连接中...')
+  if(console && console.error) {
+    console.error('[ERROR]', '数据库错误链接.' , err)
+  }
 })
+
 
 Promise.all([
   newsService.requestNews()

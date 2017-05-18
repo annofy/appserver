@@ -6,24 +6,28 @@ let express = require('express'),
 
 
 router.get('/', (req, res) => {
-  News.getNewsList()
-    .then(newsList => {
-      res.json({
-        success: true,
-        data: {
-          count: newsList.length,
-          newsList: newsList
-        },
-        reason: '获取信息成功'
-      })
+  let start = req.query.start || 0,
+    count = req.query.count || 10,
+    criteria = req.query.criteria || '';
+  Promise.all([
+    News.getNewsList(start, count, criteria),
+    News.getTotalCount(criteria)
+  ]).then(result => {
+    res.json({
+      success: true,
+      data: {
+        count: result[1],
+        newsList: result[0]
+      },
+      reason: '获取信息成功'
     })
-    .catch(err => {
-      res.json({
-        success: false,
-        data: {},
-        reason: '获取信息失败'
-      })
+  }).catch(err => {
+    res.json({
+      success: false,
+      data: {},
+      reason: '获取信息失败'
     })
+  })
 })
 
 router.get('/:id', (req, res) => {

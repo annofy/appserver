@@ -25,7 +25,7 @@
     "supervisor": "^0.12.0"
   },
   "scripts": {
-    "debug": "supervisor --harmony --watch ./routes,app.js -- app.js",
+    "debug": "NODE_ENV=development supervisor --harmony --watch ./routes,app.js -- app.js",
     "start": "NODE_ENV=production pm2 start app.js --node-args='--harmony' --name 'almniapp'",
     "test": "mocha --harmony test"
   }

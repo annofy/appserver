@@ -9,8 +9,14 @@ const mongoose = require('mongoose'),
 
 class News {
 
-  static getNewsList() {
-    return this.find();
+  static getNewsList(start = 0, count = 10, criteria = '') {
+    return this.find({title: {$regex: criteria}})
+      .skip(start * count)
+      .limit(10)
+  }
+
+  static getTotalCount(criteria = '') {
+    return this.find({title: {$regex: criteria}}).count()
   }
 
   static getNewsById(id) {

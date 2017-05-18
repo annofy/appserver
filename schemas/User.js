@@ -35,6 +35,12 @@ class User {
       .exec()
   }
 
+  static getList(start = 0, count = 10) {
+    return this.find()
+      .skip(start * count)
+      .limit(count)
+  }
+
   static updateEmail(id, email, authCode) {
     let criteria = {_id: id}
     return this.update(criteria, {email, authCode})

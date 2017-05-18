@@ -1,6 +1,6 @@
 {
   "Customer": {
-    "dbUrl": "mongodb://root@MLGB2016zzcl@59.110.69.74/qyfriend?authSource=admin",
+    "dbUrl": "mongodb://root:MLGB2016zzcl@59.110.69.74/qyfriend?authSource=admin",
     "port": 3001,
     "debug": false,
     "env": "production"

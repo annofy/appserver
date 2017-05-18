@@ -28,7 +28,7 @@ mongoose.connect(dbConfig.host + dbConfig.dbName, {
 }).then(() => {
   console.log('[OK]', '数据库连接成功.')
 }).catch(err => {
-  console.err('[ERROR]', '重新连接中...')
+  console.log('[ERROR]', '重新连接中...')
 })
 
 Promise.all([

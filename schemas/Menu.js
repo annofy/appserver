@@ -15,6 +15,10 @@ const mongoose = require('mongoose'),
     parent: {
       type: Number,
       default: undefined
+    },
+    isDelete: {
+      type: Boolean,
+      default: false
     }
   });
 

@@ -5,6 +5,10 @@ const mongoose = require('mongoose'),
     hash: String,
     url: String,
     _id: Number,
+    isDelete: {
+      type: Boolean,
+      default: false
+    }
   });
 
 class News {

@@ -45,6 +45,10 @@ class User {
     let criteria = {_id: id}
     return this.update(criteria, {email, authCode})
   }
+
+  static updateUser(id, info) {
+    return this.update({_id: id}, info)
+  }
 }
 
 UserSchemas.loadClass(User)
@@ -52,6 +56,8 @@ UserSchemas.pre('save', next => {
   console.log('update')
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt;
+  } else {
+    this.meta.updateAt = Date.now()
   }
   next()
 })

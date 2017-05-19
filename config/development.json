@@ -1,7 +1,6 @@
 {
   "Customer": {
     "dbUrl": "mongodb://localhost/qyfriend",
-    "port": 3001,
     "debug": true
   }
 }

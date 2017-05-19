@@ -6,7 +6,11 @@ const mongoose = require('mongoose'),
     author: Array,
     time: String,
     content: String,
-    uris: Array
+    uris: Array,
+    isDelete: {
+      type: Boolean,
+      default: false
+    }
   });
 
 class NewsContent {

@@ -35,9 +35,6 @@ router.post('/setmail', (req, res) => {
     authCode = req.body.authCode,
     id = req.body.id;
 
-  if(email) {
-
-  }
 
   User.updateEmail(id, email, authCode)
     .then(state => {
@@ -52,7 +49,17 @@ router.post('/setmail', (req, res) => {
 })
 
 router.post('/info', (req, res) => {
-
+    let body = req.body;
+    User.updateUser(body._id, { name: body.name, phone: body.phone, locationProvice: body.locationProvice,
+      locationCity: body.locationCity, industry: body.industry})
+      .then(result => {
+        if(result.ok) {
+          utils.success(res, {})
+        }
+      })
+      .catch(err => {
+        util.error(res, '更新失败')
+      })
 })
 
 

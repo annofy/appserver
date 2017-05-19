@@ -1,5 +1,6 @@
 const schedule = require('node-schedule'),
   mailService = require('./mailService'),
+  utils = require('../utils/utils'),
   News = require('../models/News'),
   NewsContent = require('../models/NewsContent');
 

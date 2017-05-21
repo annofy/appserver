@@ -1,6 +1,6 @@
 {
   "Customer": {
     "dbUrl": "mongodb://root:MLGB2016zzcl@59.110.69.74/qyfriend?authSource=admin",
-    "debug": false,
+    "debug": false
   }
 }

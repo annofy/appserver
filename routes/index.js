@@ -14,6 +14,8 @@ module.exports =app => {
   app.use('/nears', require('./nears'))
   app.use('/discuss', require('./discuss'))
   app.use('/teacher', require('./teacher'))
+  app.use('/comments', require('./comments'))
+  app.use('/donate', require('./donate'))
   app.use('/admin', require('./admin'))
 
   app.use((req, res) => {

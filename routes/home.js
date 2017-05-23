@@ -6,7 +6,8 @@ User = require('../models/User'),
   mailService = require('../service/mailService');
 
 router.get('/', (req, res) => {
-  let _id = '591c6d8370a568f221c5c48c'
+  let _id = ~~req.query.id? req.query.id : '591c6d8370a568f221c5c48c'
+  console.log(_id)
   User.getUserById(_id)
     .then(user => {
       utils.success(res, user)

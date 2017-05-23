@@ -1,17 +1,11 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   MessageSchema = Schema({
-    postId: {
+    tid: {
       type: Schema.Types.ObjectId,
     },
-    from: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    to: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
+    from: String,
+    to: String,
     content: String,
     meta: {
       createAt: {
@@ -39,6 +33,8 @@ class Message {
     return this.find({content: {$regex: criteria}})
       .count()
   }
+
+
 
 }
 

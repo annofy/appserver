@@ -5,10 +5,11 @@ let express = require('express'),
   NewsContent = require('../models/NewsContent');
 
 
-router.get('/', (req, res) => {
-  let start = req.query.start || 0,
-    count = req.query.count || 10,
-    criteria = req.query.criteria || '';
+router.post('/', (req, res) => {
+  let start = req.body.start || 0,
+    count = req.body.count || 10,
+    criteria = req.body.criteria || '';
+  console.log(start)
   Promise.all([
     News.getNewsList(start, count, criteria),
     News.getTotalCount(criteria)
@@ -17,6 +18,7 @@ router.get('/', (req, res) => {
       success: true,
       data: {
         count: result[1],
+        pageCount: result[1] % 10 === 0 ? result[1]/10 : parseInt(result[1]/10) + 1,
         newsList: result[0]
       },
       reason: '获取信息成功'

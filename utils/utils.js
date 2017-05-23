@@ -64,7 +64,7 @@ async function getNewsDetail(id, hash) {
 
 function sendMail(from, to, body) {
   let transporter = nodemailer.createTransport({
-      service: 'QQ',
+      service: '163',
       auth: {
         user: from.user,
         pass: from.pass
@@ -83,6 +83,7 @@ function sendMail(from, to, body) {
         reject(error)
       } else {
         console.log('[OK]', '发送邮件成功')
+        resolve(info)
       }
     })
   })
@@ -105,6 +106,12 @@ function error(res, reason) {
   })
 }
 
+function checkAdminLogin(req, req, next) {
+  console.log('[auth]', '假装已经授权管理员了')
+  next()
+}
+
 module.exports = {
-  getNewsList, getNewsDetail, sendMail, success, error
+  getNewsList, getNewsDetail, sendMail, success, error,
+  checkAdminLogin
 }

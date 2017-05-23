@@ -1,5 +1,6 @@
 const express = require('express'),
   router = express.Router(),
+  utils = require('../utils/utils'),
   cityData = require('../data/cityCode.json');
 
 const nearsUser = [
@@ -308,7 +309,7 @@ router.get('/', async (req, res) => {
     city = req.query.city
     console.log(req.query.city)
     cityObj = await cityData.filter(cv => cv['name'].indexOf(city) !== -1)
-    cityCode = cityObj[0]? cityObj[0].code : 0
+    cityCode = cityObj[0] ? cityObj[0].code : 0
   }
   await nearsUser.map(cv => {
     if (cv.cityCode === cityCode) {
@@ -316,7 +317,7 @@ router.get('/', async (req, res) => {
     }
   })
 
-  if(userList.length === 0) {
+  if (userList.length === 0) {
     userList = [
       {
         id: 1,
@@ -337,6 +338,32 @@ router.get('/', async (req, res) => {
     },
     reason: '附近的小伙伴都找出来咯'
   })
+})
+
+router.post('/send', (req, res) => {
+  let address = req.body.address,
+    content = req.body.content,
+    name = req.body.name;
+  if (address.indexOf('@') === -1) {
+    utils.error(res, '邮箱地址错误')
+  }
+  utils.sendMail({
+    user: '18372627060@163.com',
+    pass: 'zlf559262',
+    name: '18372627060@163.com'
+  }, {
+    email: address
+  },{
+    subject: '系统通知',
+    text: '系统',
+    html: '<div>' + content +'</div>'
+  })
+    .then(result => {
+      utils.success(res, {})
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 

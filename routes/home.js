@@ -38,7 +38,7 @@ router.post('/setmail', (req, res) => {
 
   User.updateEmail(id, email, authCode)
     .then(state => {
-      if(state.ok) {
+      if (state.ok) {
         utils.success(res, {})
       }
     })
@@ -49,17 +49,31 @@ router.post('/setmail', (req, res) => {
 })
 
 router.post('/info', (req, res) => {
-    let body = req.body;
-    User.updateUser(body._id, { name: body.name, phone: body.phone, locationProvice: body.locationProvice,
-      locationCity: body.locationCity, industry: body.industry})
-      .then(result => {
-        if(result.ok) {
-          utils.success(res, {})
-        }
-      })
-      .catch(err => {
-        util.error(res, '更新失败')
-      })
+  let body = req.body;
+  User.updateUser(body._id, {
+    name: body.name, phone: body.phone, locationProvice: body.locationProvice,
+    locationCity: body.locationCity, industry: body.industry
+  })
+    .then(result => {
+      if (result.ok) {
+        utils.success(res, {})
+      }
+    })
+    .catch(err => {
+      util.error(res, '更新失败')
+    })
+})
+
+router.post('/income', (req, res) => {
+  let form = req.body.form;
+  console.log('form', form)
+  User.add(form)
+    .then(user => {
+      utils.success(res, user)
+    })
+    .catch(err => {
+      utils.error(res, '请求失败')
+    })
 })
 
 

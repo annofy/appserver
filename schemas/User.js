@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  uitlsCrypto = require('../utils/utilsCrypto'),
   UserSchemas = Schema({
     name: String,
     locationProvince: String,
@@ -10,6 +11,7 @@ const mongoose = require('mongoose'),
       type: Number,
       ref: 'Gradution'
     },
+    pwd: String,
     authCode: String,
     email: String,
     isDelete: {
@@ -49,11 +51,23 @@ class User {
   static updateUser(id, info) {
     return this.update({_id: id}, info)
   }
+
+  static updatePass(id, pass) {
+    pass = uitlsCrypto.encrypt(pass)
+    return this.update({_id: id}, {pwd: pass})
+  }
+
+  static add(user) {
+    return this.create(user)
+  }
 }
 
 UserSchemas.loadClass(User)
 UserSchemas.pre('save', next => {
-  console.log('update')
+  this.meta = {
+    createAt: Date.now(),
+    updateAt: Date.now()
+  }
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt;
   } else {

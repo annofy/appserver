@@ -24,8 +24,10 @@ class Gradution {
     return this.create(users)
   }
 
-  static gradutionList() {
-    return this.find()
+  static gradutionList(start=0, count=10, criteria='') {
+    return this.find({ desc: {$regex: criteria }})
+      .skip(start * count)
+      .limit(count)
   }
 }
 

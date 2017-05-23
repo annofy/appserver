@@ -52,3 +52,5 @@ MessageSchema.pre('save', next => {
 })
 
 MessageSchema.index({ meta: { }})
+
+module.exports = MessageSchema;
